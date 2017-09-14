@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from "react-redux";
-import { store } from "./store";
-import router from "./routes";
+import App from './components/App';
+import { history,store } from "./store";
+
+const routes = require('./routes/index').default(store)
 
 ReactDOM.render(
-  <Provider store={store}>
-    {router}
-  </Provider>,
+  <App store={store} routes={routes} history={history}/>,
   document.getElementById('root')
 );

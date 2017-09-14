@@ -1,35 +1,25 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react'
+import { Router } from 'react-router'
+import { Provider } from 'react-redux'
+import PropTypes from 'prop-types'
 
-class App extends Component {
-	componentDidUpdate(prevProps) {
-    const { dispatch, redirectUrl } = this.props
-    const statusAuthChanged = prevProps.isLoggedIn !== this.props.isLoggedIn
-
-    if (statusAuthChanged) {
-      this.context.router.push(redirectUrl)
-    }
-
+class App extends React.Component {
+  static propTypes = {
+    store: PropTypes.object.isRequired,
+    routes: PropTypes.object.isRequired,
   }
-  
-	render() {
-		return (
-			<div className="container">
-        {this.props.children}
-      </div>
-		);
-	}
-}
+  shouldComponentUpdate () {
+    return false
+  }
 
-App.contextTypes = {
-  router: React.PropTypes.func.isRequired
-};
-
-function mapStateToProps(state) {
-  return {
-    isLoggedIn: state.user.isAuthenticated,
-    redirectUrl: state.login.redirectUrl
+  render () {
+    let {store,history,routes} = this.props;
+    return (
+      <Provider store={store}>
+          <Router history={history} children={routes} />
+      </Provider>
+    )
   }
 }
 
-export default connect(mapStateToProps)(App)
+export default App

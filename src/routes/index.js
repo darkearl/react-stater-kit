@@ -1,28 +1,36 @@
-import React from "react";
-import { Router, Route, IndexRoute } from "react-router";
-import { history } from "../store";
+import Home from './Home';
+import Login from './Login';
+import NotFound from './NotFound';
+import RequireAuthentication from '../components/RequireAuthentication'
+import TestPage from './TestPage';
+import CoreLayout from '../layouts/pagelayouts';
 
-// import component for route
-import App from "../components/App";
-import Home from "../components/Home";
-import Login from "../components/Login";
-import RequireAuthentication from "../components/RequireAuthentication";
-import NotFound from "../components/NotFound";
+import { injectReducer } from '../store/reducer'
 
-// build the router
-const router = (
-  <Router onUpdate={() => window.scrollTo(0, 0)} history={history}>
-    <Route path="/" component={App}>
-    	<Route path="login" component={Login}/>
-		  <Route component={RequireAuthentication}>
-		    <IndexRoute component={Home}/>
-    		<Route path="home" component={Home}/>
+import reducerLogin from './Login/modules/login'
 
-		  </Route>
-      <Route path="*" component={NotFound}/>
-    </Route>
-  </Router>
-);
+const requireAuthRoutes = (store) => ({
+  component   : RequireAuthentication,
+  childRoutes : [
+    TestPage
+  ]
+})
 
-// export
-export default router;
+export const createRoutes = (store) =>{ 
+  //init reducer
+  injectReducer(store, { key: 'login', reducer: reducerLogin });
+
+  return {
+    path        : '/',
+    component   : CoreLayout,
+    indexRoute  : Home,
+    childRoutes : [
+      Login(store),
+      requireAuthRoutes(store),
+      // requireNotAuth(store)
+      NotFound
+    ]
+  }
+}
+
+export default createRoutes

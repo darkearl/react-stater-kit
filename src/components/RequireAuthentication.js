@@ -1,15 +1,19 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
-import { setRedirectUrl } from '../actions/login'
+import PropTypes from 'prop-types';
+import { setRedirectUrl } from '../routes/Login/modules/login';
 
 class RequireAuthentication extends Component {
+  static propTypes = {
+    router: PropTypes.object.isRequired
+  }
 
 	componentDidMount() {
-		const { dispatch, currentURL, isLoggedIn } = this.props
+		const { dispatch, currentURL, isLoggedIn, router } = this.props
 
     if (!isLoggedIn) {
       dispatch(setRedirectUrl(currentURL))
-      this.context.router.replace('/login')
+      router.replace('/login')
     }
 	}
 	render() {
@@ -22,10 +26,6 @@ class RequireAuthentication extends Component {
     }
 	}
 }
-
-RequireAuthentication.contextTypes = {
-  router: React.PropTypes.func.isRequired
-};
 
 function mapStateToProps(state, ownProps) {
   return {
