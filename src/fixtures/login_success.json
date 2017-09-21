@@ -1,0 +1,9 @@
+{
+  "status":200,
+  "statusText":null,
+  "data": {
+    "MemberId": "160",
+    "Token": "$2a$13$lInp6SRVuIRUiD5xXRsBYe/Lza5YPKQE2SuSK/OxIhQcg.3T7I8L6",
+    "status": "success"
+  }
+}

@@ -4,13 +4,17 @@ import { connect } from 'react-redux';
 class Login extends Component {
 	render() {
 		return (
-			<div>page Login</div>
+			<div>
+				page Login<br />nextPathname: {this.props.nextPathname}
+			</div>
 		);
 	}
 }
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+		nextPathname: state.routing.locationBeforeTransitions.state.nextPathname
+	}
 }
 
 export default connect(mapStateToProps)(Login)

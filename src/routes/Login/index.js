@@ -1,6 +1,6 @@
-// import { injectReducer } from '../../store/reducer'
+import { injectReducer } from '../../store/reducer'
 import Login from './components/Login'
-// import reducerLogin from './modules/login'
+import reducerLogin from './modules/login'
 
 export default (store) => {
 	return {
@@ -13,7 +13,7 @@ export default (store) => {
 
 				
 				/*  Add the reducer to the store */
-				// injectReducer(store, { key: 'login', reducer: reducerLogin })
+				injectReducer(store, { key: 'login', reducer: reducerLogin })
 
 				/*  Return getComponent   */
 				cb(null, Login)

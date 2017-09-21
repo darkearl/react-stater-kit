@@ -1,33 +1,44 @@
 import Home from './Home';
 import Login from './Login';
 import NotFound from './NotFound';
-import RequireAuthentication from '../components/RequireAuthentication'
 import TestPage from './TestPage';
 import CoreLayout from '../layouts/pagelayouts';
 
-import { injectReducer } from '../store/reducer'
+import FilterRoute from '../components/FilterRoute';
 
-import reducerLogin from './Login/modules/login'
+// import { injectReducer } from '../store/reducer'
 
-const requireAuthRoutes = (store) => ({
-  component   : RequireAuthentication,
+// import reducerLogin from './Login/modules/login'
+
+const privateRoutes = (store) => ({
+  component   : FilterRoute(store),
   childRoutes : [
     TestPage
   ]
 })
 
+const publicRoutes = (store) => ({
+  component   : FilterRoute(store,false),
+  childRoutes : [
+    Login(store),
+    //register
+  ]
+})
 export const createRoutes = (store) =>{ 
   //init reducer
-  injectReducer(store, { key: 'login', reducer: reducerLogin });
+  // injectReducer(store, { key: 'login', reducer: reducerLogin });
 
   return {
     path        : '/',
     component   : CoreLayout,
     indexRoute  : Home,
     childRoutes : [
-      Login(store),
-      requireAuthRoutes(store),
-      // requireNotAuth(store)
+      // About,
+      // privacy,
+      // contact
+      privateRoutes(store),
+      publicRoutes(store),
+      // Wildcard routes, e.g. { path: '*', ... } (must go last)
       NotFound
     ]
   }

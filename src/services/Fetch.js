@@ -10,6 +10,9 @@ export const fetchJson = (url, options = {}) => {
     requestHeaders.set('x-token', options.token);
   }
 
+  if(options.authorize && options.authorize.username && options.authorize.password){
+    requestHeaders.set('Authorization', 'Basic ' + base64.encode(options.authorize.username + ":" + options.authorize.password));
+  }
   return fetch(url, { ...options, headers: requestHeaders })
     .then(response => response.text().then(text => ({
       status: response.status,
