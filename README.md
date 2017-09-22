@@ -1,5 +1,8 @@
 # react-stater-kit
 It's a nice beginning for a new react project with redux.
+
+## Demo
+  https://darkearl.github.io/react-stater-kit/
 ## Howto
 
 Install Dependencies:
