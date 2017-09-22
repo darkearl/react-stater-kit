@@ -1,9 +1,14 @@
 import { createStore as createReduxStore, applyMiddleware, compose } from 'redux';
-import { browserHistory } from "react-router";
 import { syncHistoryWithStore, routerMiddleware } from "react-router-redux";
 import makeRootReducer from './reducer'
 import thunkMiddleware from 'redux-thunk';
 import logger from 'redux-logger';
+import { createHistory, useBasename } from "history";
+import Config from '../config';
+// create basename
+const browserHistory = useBasename(createHistory)({
+    basename: Config.publicPath
+});
 
 // add the middlewares
 let middlewares = [];
