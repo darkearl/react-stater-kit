@@ -18,7 +18,7 @@ export default function createComponent(store, privateRoute=true){
         }
         componentDidMount() {
             const { router } = this.props
-            console.log(requireByPass,privateRoute)
+
             if(!requireByPass){
                 if(privateRoute){
                     router.replace({

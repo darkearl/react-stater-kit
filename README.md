@@ -30,4 +30,5 @@ Done.
   - React-router (https://github.com/ReactTraining/react-router)
   - Redux-thunk (https://github.com/gaearon/redux-thunk)
   - Redux-logger (https://github.com/evgenyrodionov/redux-logger)
+  - React-event-listener (https://github.com/oliviertassinari/react-event-listener)
 ## FAQ
